@@ -2,7 +2,6 @@ package com.example.gemini.chatScreen
 
 import android.content.Intent
 import android.widget.Toast
-import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
@@ -40,7 +39,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.input.pointer.pointerInteropFilter
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
@@ -185,7 +183,7 @@ fun ChatBubbleItem(
 
 @Composable
 fun UtilRow(onCopyClick: () -> Unit = {}, onShareClick: () -> Unit = {}) {
-    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End, ) {
+    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
         IconButton(onClick = {
             onShareClick()
         }) {
@@ -211,15 +209,6 @@ fun UtilRow(onCopyClick: () -> Unit = {}, onShareClick: () -> Unit = {}) {
     }
 }
 
-@Composable
-fun Share(textToShare: String) {
-    val shareIntent = Intent(Intent.ACTION_SEND).apply {
-        type = "text/plain"
-        putExtra(Intent.EXTRA_TEXT, textToShare)
-    }
-    val chooserIntent = Intent.createChooser(shareIntent, null)
-    LocalContext.current.startActivity(chooserIntent)
-}
 @Composable
 fun MessageInput(
     onSendMessage: (String) -> Unit,
